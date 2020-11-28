@@ -1,0 +1,19 @@
+((layouts  "just-a-data.sxml")
+ (ext . "js"))
+(use json)
+(use html-parser)
+
+(display
+ (string-append
+  "var data = "
+  (let ((p (open-output-string)))
+    (let loop ((posts (all-posts)) (json '()))
+      (if (null? (cdr posts))
+          (json-write json p)
+          (let ((page (car posts)))
+            (loop (cdr posts)
+                  (cons (list->vector `((title . ,($ 'title page))
+                                        (url . ,(string-append (base-uri) (page-path page)))
+                                        (content . ,(html-strip (read-page page))))) json)))))
+    (get-output-string p))
+  ";//"))

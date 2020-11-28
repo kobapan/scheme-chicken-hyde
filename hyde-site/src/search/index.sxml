@@ -1,0 +1,8 @@
+()
+`(link (@ (rel "stylesheet") (href ,(base-uri)"/css/search-incremental.css")))
+`(script (@ (src ,(base-uri)"/posts-data.js")))
+`(script (@ (src ,(base-uri)"/js/search-incremental.js")))
+
+`(h2 ,($ 'title))
+
+`(div (@ (id "searchbox")))

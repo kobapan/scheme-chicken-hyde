@@ -1,0 +1,18 @@
+((synopsis "A static website compiler")
+ (author "Moritz Heidkamp")
+ (category web)
+ (license "BSD")
+ (needs sxml-transforms
+        doctype
+        matchable
+        (scss "0.5.0")
+        (spiffy "4.9")
+        colorize
+        intarweb
+        (uri-common 1.2)
+        svnwiki-sxml
+        defstruct
+        sxpath
+        html-parser
+        atom
+        rfc3339))

@@ -1,0 +1,31 @@
+()
+
+`((div (@ (class "article-meta"))
+       (h1 (@ (class "title")) ,($ 'title))
+       (div (@ (class "tags-date"))
+            ,(if ($ 'date)
+                 `(div (@ (class "date"))
+                        ,($ 'date)" ")
+                 "")
+            ,(fold (lambda (tag seed)
+                     (append seed
+                             `(,(and (pair? seed) " ")
+                               (span (a (@ (href ,(base-uri)"/tags/#",tag)
+                                           (class "tag"))
+                                        "#",tag)))))
+                   '()
+                   (or ($ 'tags) '()))))
+       
+  (div (@ (class "article-content"))
+       (inject ,(toc contents)))
+  )
+
+;comment system by intensedebate.com
+`(script
+"var idcomments_acct = 'xxxxxxxxxxxxxxx';"
+"var idcomments_post_id;"
+"var idcomments_post_url = '" ,(base-uri) ,(page-url) "';"
+)
+`(span (@ (id "IDCommentsPostTitle") (style "display:none")))
+`(script (@ (type "text/javascript") (src "https://www.intensedebate.com/js/genericCommentWrapperV2.js")))
+

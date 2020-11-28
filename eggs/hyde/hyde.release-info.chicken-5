@@ -1,0 +1,5 @@
+(uri files-list "https://code.call-cc.org/files-list?egg={egg-name};egg-release={egg-release};chicken-release=4")
+(release "1")
+(release "2")
+(release "3")
+(release "4")

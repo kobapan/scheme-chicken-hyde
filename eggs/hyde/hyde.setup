@@ -1,0 +1,28 @@
+(define info '((version "0.21.0")))
+
+(compile -s -O2 -d1 hyde-page-eval-env.scm -J)
+(compile -s -O2 -d0 hyde-page-eval-env.import.scm)
+
+(compile -s -O2 -d1 hyde.scm -J)
+(compile -s -O2 -d0 hyde.import.scm)
+
+(compile -s -O2 -d1 hyde-atom.scm -J)
+(compile -s -O2 -d0 hyde-atom.import.scm)
+
+(compile -o hyde -O2 -d1 hyde-cmd.scm)
+
+(install-extension
+ 'hyde
+ '("hyde.so" "hyde.import.so"
+   "hyde-page-eval-env.so" "hyde-page-eval-env.import.so")
+ info)
+
+(install-extension
+ 'hyde-atom
+ '("hyde-atom.so" "hyde-atom.import.so")
+ info)
+
+(install-program
+ 'hyde-cmd
+ '("hyde")
+ info)

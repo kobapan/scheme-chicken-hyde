@@ -1,0 +1,8 @@
+()
+
+`(inject ,contents)
+(if ($ 'tags)
+    `(div
+      (h2 "「",(car ($ 'tags))"」related posts")
+      ,(tag-posts-links (car ($ 'tags)) 10))
+    "")

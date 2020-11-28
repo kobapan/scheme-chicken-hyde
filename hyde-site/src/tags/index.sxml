@@ -1,0 +1,22 @@
+((title . "#tags"))
+`(style "#tags{text-decoration:underline;}")
+(let ((tag-groups (tag-groups (all-posts))))
+  `((div (@ (id "tagcloud"))
+       ,(map (lambda (t)
+               `((a (@ (href ,(base-uri)"/tags/#",(car t))
+                       (class ,(tag-class t)" onetag"))
+                    "#",(car t))))
+             tag-groups))
+
+    (div ,(map (lambda (tag-group)
+                 `((h2 (@ (class "tag-group") (id ,(car tag-group)))
+                       ,(car tag-group))
+                   (ul ,(map (lambda (post)
+                               `(li (a (@ (href ,(string-append (base-uri) (alist-ref 'url post)))) ,(alist-ref 'title post))
+                                    " "
+                                    (span (@ (class "date")) ,(alist-ref 'date post))
+
+                               ))
+                             (cdr tag-group)))))
+               tag-groups))))
+

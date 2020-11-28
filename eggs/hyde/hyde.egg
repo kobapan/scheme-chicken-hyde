@@ -1,0 +1,37 @@
+((synopsis "A static website compiler")
+ (author "Moritz Heidkamp")
+ (license "BSD")
+ (category web)
+ (dependencies sxml-transforms
+               doctype
+               matchable
+               scss
+               spiffy
+               colorize
+               intarweb
+               uri-common
+               svnwiki-sxml
+               defstruct
+               sxpath
+               html-parser
+               atom
+               rfc3339
+               srfi-1
+               srfi-13
+               srfi-18
+               srfi-69)
+ (test-dependencies test)
+ (platform (or unix linux))
+ (components
+  (extension hyde
+             (component-dependencies hyde.page-eval-env)
+             (source-dependencies "backwards-compatible-module.scm"))
+  (extension hyde.page-eval-env
+             (source "hyde-page-eval-env.scm")
+             (source-dependencies "backwards-compatible-module.scm"))
+  (extension hyde.atom
+             (source "hyde-atom.scm")
+             (source-dependencies "backwards-compatible-module.scm"))
+  (program hyde-cmd
+           (install-name hyde)
+           (component-dependencies hyde))))

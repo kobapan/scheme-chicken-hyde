@@ -1,0 +1,12 @@
+()
+`(div (@ (id "home"))
+      (div (@ (class "home-banner"))
+           (a (@ (href ,(base-uri)"/profile/"))
+              (img (@ (src "https://hogehoge.jpg")))
+              (p ,(map (lambda (text)
+                         `(i (@ (class "fa")) ,text))
+                    '("My" "Life" "is...")))))
+      (h2 "#hyde new posts")
+      ,(tag-posts-links 'hyde 5)
+
+      )

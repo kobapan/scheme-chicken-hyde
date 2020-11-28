@@ -1,0 +1,336 @@
+body {
+    font-size: 95%;
+	max-width: 68em;
+	position: relative;
+	margin: 0 auto;
+	color: #444;
+}
+
+header {
+    background: #fbfbfb;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+}
+header .headerInner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+header .headerInner #search-box {
+    display: block;
+    float: right;
+}
+header .headerInner #search-box form input {
+    width: 100px;
+}
+/* responsible 2 column start */
+/* https://jsnotice.com/posts/2020-05-09/ */
+#content{
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.column--l,
+.column--r {
+    width: 100%;
+}
+@media (min-width: 1024px) {
+    .column--l {
+        width: calc((100% - 161.8px) - 2em);
+    }
+    .column--r {
+        width: 161.8px;
+        padding-left: 2em;
+    }
+}
+/* responsible 2 column ends */
+
+footer{
+    /* position: sticky; */
+    /* position: -webkit-sticky; */
+    bottom: 0;
+    background: #fbfbfb;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+}
+footer .footer__copyright {
+    width: 100%;
+    /* color: #fff; */
+    font-size: 11px;
+    text-align: center;
+    padding: 5px 0 0;
+    margin: 0;
+}
+/* footer .footer__copyright img { */
+/*     display: inherit; */
+/*     margin-left: 1em; */
+/* } */
+
+/* back to top button start */
+/* https://cotodama.co/pagetop/ */
+#page_top{
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  opacity: 0.6;
+}
+#page_top a{
+  width: 60px;
+  height: 60px;
+  text-decoration: none;
+}
+#page_top a::before{
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f139';
+  font-size: 50px;
+  color: #4f4e4b45;
+}
+/* back to top button ends */
+
+/* navigation start */
+nav{
+    text-align: left;
+    position: sticky;
+    position: -webkit-sticky;
+    top:1em;
+    padding-top: 1em;
+}
+nav ul.gmenu li a {
+    color: #444;
+    font-size: 13px;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 10px;
+}
+nav ul.gmenu {
+    margin-top:1em;
+    padding: 0;
+}
+nav ul.gmenu > li {
+    list-style: none;
+}
+/* navigation ends */
+
+a {
+    text-decoration: none;
+	color: #31a1cd;
+}
+a:hover {
+	color: #b10610;
+}
+
+img {
+    max-width:100%;
+    max-height:400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+figure {
+    margin: 1em 15px 15px 0;
+    width: 100%;
+    text-align: center;
+}
+figure figcaption {
+    font-size: small;
+    margin-top: 0.5em;
+}
+
+
+p {
+    margin-top: 1em;
+    line-height: 1.6em;
+    text-indent: 1em;
+}
+p img {
+    display: block;
+}
+
+.no-indent {
+    text-indent: 0;
+}
+
+h2 {
+    margin-top: 2em;
+}
+
+blockquote {
+    background: #f8f4e6;
+    font-style: oblique;
+    border: 1px dotted gray;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-style: oblique;
+}
+blockquote p {
+    margin-top: 1em;
+}
+
+div,h2,.float_none {
+    clear: both;
+}
+
+ul {
+    padding-left: 1em;
+    margin: 0;
+}
+
+.logo {
+    text-align: left;
+}
+.logo span:hover {
+    color: #97d0e6;
+}
+.logo img {
+    height: 30px;
+    vertical-align: middle;
+    display: inline;
+}
+.logo span {
+    color: #888;
+    margin-left: 0.5em;
+}
+
+#tagcloud a.onetag {
+    padding-right:1em;
+}
+#tagcloud .tag-low {
+    font-size: .8em;
+    font-weight: 200;
+}
+#tagcloud .tag-medium { 
+    font-size: 1.2em;
+    font-weight: 600;
+}
+#tagcloud .tag-high { 
+    font-size: 1.8em;
+    font-weight: 800;
+}
+
+span.date, span a.tag {
+    font-size:80%;
+}
+
+div#toc {
+    background-color: #F9F9F9;
+    border: 1px solid #AAAAAA;
+    font-size: 95%;
+    padding-right: 1.5em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+}
+div#toc p {
+    font-weight: bold;
+    padding-left:1em;
+    margin-top: 1em;
+}
+
+div.quote {
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    clear: both;
+    margin: 1em 15px 10px 0;
+    padding: 10px 15px;
+}
+
+div.tags-date {
+    margin-top: -1em;
+}
+
+div.article-content {
+    margin-top: 1em;
+}
+
+div#home {
+}
+
+div#home .home-banner {/*親div*/
+    position: relative;/*相対配置*/
+    max-width:500px;
+    margin-bottom: -2em;
+    margin-top: 3em;
+}
+div#home .home-banner p {
+    position: absolute;/*絶対配置*/
+    color: white;/*文字は白に*/
+    font-weight: bold; /*太字に*/
+    font-size: 2em;/*サイズ2倍*/
+    top: 60%;
+    left: 50%;
+    ms-transform: translate(-50%,-50%);
+    webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    margin:0;
+    padding:0;
+    text-indent:0;
+    width:80%;
+}
+div#home .home-banner p a{
+    color: white;/*文字は白に*/
+}
+div#home .home-banner p .fa {/*アイコンに対して*/
+    display:block;/*前後に改行*/
+    padding-bottom:10px;/*文字との隙間*/
+}
+div#home .home-banner img {
+    filter: brightness(80%);
+}
+
+table {
+    background-color: #FFFFFF;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+    margin: 1em 0;
+}
+th {
+    background-color: #F5F5F5;
+    border-right: 1px solid #DDDDDD;
+    color: #333333;
+}
+td {
+    border-right: 1px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
+}
+th, td {
+    border-collapse: separate;
+    border-spacing: 1px;
+    padding: 0.3em 10px;
+}
+
+
+
+div#amazon img {
+    width: 100px;
+    display: inline;
+}
+
+div.video-wrap  {
+    max-width:500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.video-wrap div.video {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+}
+
+div.video-wrap div.video iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}

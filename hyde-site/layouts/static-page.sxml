@@ -1,0 +1,6 @@
+()
+
+`((div (@ (class "article-meta"))
+       (h1 (@ (class "title")) ,($ 'title)))
+  (div (@ (class "article-content"))
+       (inject ,(toc contents))))

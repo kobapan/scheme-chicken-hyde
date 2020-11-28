@@ -1,0 +1,8 @@
+((layouts  "just-a-data.sxml")
+ (ext . "xml"))
+(and (display "<?xml version=\"1.0\" encoding=\"UTF-8\"?>") "")
+`(urlset (@ (xmlns "http://www.sitemaps.org/schemas/sitemap/0.9"))
+        ,(map (lambda (p)
+                `(url (loc ,(string-append (base-uri) (page-path p)))
+                      (lastmod ,($ 'date p))))
+              (all-posts)))

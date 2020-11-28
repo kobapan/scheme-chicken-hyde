@@ -1,0 +1,18 @@
+((title . "My blog"))
+`(style "#blog{text-decoration:underline}")
+
+`(ul ,(map (lambda (page)
+             `((li (a (@ (href ,(base-uri),(page-path page))) ,($ 'title page))
+                   " "
+                   (span (@ (class "date")) ,($ 'date page))
+
+                   ,(fold (lambda (tag seed)
+                            (append seed
+                                    `(" "(span (a (@ (href ,(base-uri)"/tags/#",tag)
+                                                     (class "tag"))
+                                                  "#",tag)))))
+                          '()
+                          (or ($ 'tags page) '()))
+                   )))
+           (all-posts)))
+
