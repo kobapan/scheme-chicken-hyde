@@ -2,6 +2,8 @@
 
 [Hyde](http://wiki.call-cc.org/eggref/4/hyde) is a static site generator written by scheme language CHICKEN.
 
+## what this repository for
+
 Hyde offers limited things, so I added following items.
 
 - toc (table of contents)
@@ -15,6 +17,7 @@ Hyde offers limited things, so I added following items.
 - sitemap
 - rss
 
+## to use
 I modified Hyde egg. So you need to install Hyde locally.
 ```bash
 cd eggs/hyde
