@@ -15,3 +15,8 @@ Hyde offers so limited things, I added following items.
 - sitemap
 - rss
 
+I modified Hyde egg. So you need to install Hyde locally.
+```bash
+cd eggs/hyde
+chicken-install
+```
