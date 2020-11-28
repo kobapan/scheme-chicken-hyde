@@ -2,7 +2,7 @@
 
 [Hyde](http://wiki.call-cc.org/eggref/4/hyde) is a static site generator written by scheme language CHICKEN.
 
-Hyde offers so limited things, I added following items.
+Hyde offers limited things, so I added following items.
 
 - toc (table of contents)
 - list all posts
