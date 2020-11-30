@@ -23,3 +23,5 @@ I modified Hyde egg. So you need to install Hyde locally.
 cd eggs/hyde
 chicken-install
 ```
+## running example
+https://kobapan.com
