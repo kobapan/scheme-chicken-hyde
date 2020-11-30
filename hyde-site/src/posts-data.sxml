@@ -7,7 +7,7 @@
  (string-append
   "var data = "
   (let ((p (open-output-string)))
-    (let loop ((posts (all-posts)) (json '()))
+    (let loop ((posts (all-pages-and-posts)) (json '()))
       (if (null? (cdr posts))
           (json-write json p)
           (let ((page (car posts)))
