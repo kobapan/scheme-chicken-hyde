@@ -69,6 +69,15 @@
 (define (all-posts #!optional (tag #f))
   (sort-by (pages-matching "blog/.+\\.md$" tag) page-date->second))
 
+(define (all-pages-and-posts)
+  (let ((p '("profile"
+             "links")))
+    (append
+     (all-posts)
+     (pages-matching
+      (string-trim-right
+       (fold (lambda (s res) (string-append s "/.+$|" res)) "" p)
+       (string->char-set "|"))))))
 
 ;; ---
 ;; tags

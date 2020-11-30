@@ -1,5 +1,7 @@
 ()
 
+`(style ,(string-append "#" (string-trim (pathname-directory (page-path (current-page)))  #\/) "{text-decoration:underline;}"))
+
 `((div (@ (class "article-meta"))
        (h1 (@ (class "title")) ,($ 'title)))
   (div (@ (class "article-content"))
