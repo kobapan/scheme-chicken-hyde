@@ -23,5 +23,3 @@ I modified Hyde egg. So you need to install Hyde locally.
 cd eggs/hyde
 chicken-install
 ```
-## Markdown reference
-[Daring Fireball: Markdown Syntax Documentation](https://daringfireball.net/projects/markdown/syntax)
