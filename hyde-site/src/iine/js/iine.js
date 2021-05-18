@@ -1,24 +1,24 @@
 // iine.js
 $(document).ready(function(){
-    $('.vote-button').each(function(){
-        var $vote = $(this);
+    $('.iine-button').each(function(){
+        var $iine = $(this);
         // 表示処理
         $.ajax({
             type: 'GET',
             url: '/iine/?mode=get',
             cache: false,
             success: function(data){
-                $vote.find('.number').text(data);
+                $iine.find('.number').text(data);
             }
         });
         // 追加処理
-        $vote.click(function(){
+        $iine.click(function(){
             $.ajax({
                 type: 'POST',
                 url: '/iine/?mode=put',
                 cache: false,
                 success: function(data){
-                    $vote.find('.number').text(data);
+                    $iine.find('.number').text(data);
                 }
             });
             return(false);
