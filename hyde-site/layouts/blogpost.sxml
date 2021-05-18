@@ -20,9 +20,9 @@
        (inject ,(toc contents)))
   )
 
-`(div (@ (class "vote") (id "vote"))
-      (p (@ (class "vote-lead")) "この記事が気に入ったら →")
-      (a (@ (href "#") (class "vote-button"))
+`(div (@ (class "iine") (id "iine"))
+      (p (@ (class "iine-lead")) "この記事が気に入ったら →")
+      (a (@ (href "#") (class "iine-button"))
          (span (@ (class "icon")) (i (@ (class "fa fa-heart"))) "いいネ!")
          (span (@ (class "number")))))
 
