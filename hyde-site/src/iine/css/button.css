@@ -1,19 +1,19 @@
-.vote {
+.iine {
     margin-top: 2em;
     border: #b0b0b0 1px solid;
     padding: 0.5em;
 }
-.vote .vote-lead {
+.iine .iine-lead {
     display: table-cell;
     padding-right: 0.5em;
     text-indent: 0;
 }
-.vote .vote-button {
+.iine .iine-button {
     display: table-cell;
 }
-.vote .vote-button .icon {
+.iine .iine-button .icon {
 }
-.vote .vote-button .number {
+.iine .iine-button .number {
     position: relative;
     border: #278dbf 1px solid;
     border-radius: 20%;
@@ -21,7 +21,7 @@
     padding: 0 5px;
 }
 /* https://cssarrowplease.com */
-.vote .vote-button .number:after, .vote .vote-button .number:before {
+.iine .iine-button .number:after, .iine .iine-button .number:before {
 	right: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -31,13 +31,13 @@
 	position: absolute;
 	pointer-events: none;
 }
-.vote .vote-button .number:after {
+.iine .iine-button .number:after {
 	border-color: #rgba(255, 255, 255, 0);
 	border-right-color: #ffffff;
 	border-width: 4px;
 	margin-top:  -4px;
 }
-.vote .vote-button .number:before {
+.iine .iine-button .number:before {
 	border-color: rgba(155, 180, 196, 0);
 	border-right-color: #278dbf;
 	border-width: 5px;
