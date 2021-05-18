@@ -4,10 +4,12 @@
         (head
          (meta (@ (http-equiv "content-type") (content "application/xhtml+xml; charset=UTF-8")))
          (meta (@ (name "viewport") (content "width=device-width, initial-scale=1.0")))
-         (link (@ (href ,(base-uri)"/css/style.css") (rel "stylesheet") (type "text/css")))
+         (link (@ (rel "stylesheet") (href ,(base-uri)"/css/style.css") (type "text/css")))
          (link (@ (rel "stylesheet") (href "https://use.fontawesome.com/releases/v5.6.4/css/all.css")))
+         (link (@ (rel "stylesheet") (href ,(base-uri)"/iine/css/button.css") (type "text/css")))
          (script (@ (type "text/javascript") (src "https://code.jquery.com/jquery-3.5.1.min.js")))
          (script (@ (type "text/javascript") (src ,(base-uri)"/js/script.js")))
+         (script (@ (type "text/javascript") (src ,(base-uri)"/iine/js/iine.js")))
          (script (@ (type "text/javascript") (src ,(base-uri)"/js/googleAnalytics.js")))
          (link (@ (rel "shortcut icon") (href ,(base-uri)"/img/favicon.ico")))
          (link (@ (rel "icon") (type "image/gif") (href ,(base-uri)"/img/animated_favicon1.gif")))
