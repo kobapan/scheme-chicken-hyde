@@ -15,7 +15,6 @@ exec csi -s "$0" "$@"
         (reverse result)
         (loop (cdr params)
               (cons (string-split (car params) separator) result)))))
-
 (define ($.get src key)
   (let ((v (alist-ref key src equal?)))
     (if v (car v) #f)))
@@ -26,11 +25,11 @@ exec csi -s "$0" "$@"
 (let* ((db (open-database "iine.db"))
        (mode ($.get uri-params "mode"))
        (pid (get-environment-variable "HTTP_REFERER"))
-       (uid ($.get cookies "userid"))
+       (uid ($.get cookies "iine-uid"))
        (display-count
         (lambda () (display (query
                              fetch-value
-                             (sql db "SELECT COUNT(*) FROM iine_table WHERE entry_id = ?")
+                             (sql db "SELECT COUNT(*) FROM iine_table WHERE pid = ?")
                              pid))))
        )
   ;; create table
@@ -38,8 +37,8 @@ exec csi -s "$0" "$@"
              "CREATE TABLE IF NOT EXISTS iine_table
               (
                id integer primary key not null,
-               entry_id integer not null,
-               account_id text not null,
+               pid integer not null,
+               uid text not null,
                created timestamp not null default (datetime('now', 'localtime'))
               );"))
   (exec (sql db "PRAGMA synchronous = 0"))
@@ -48,27 +47,26 @@ exec csi -s "$0" "$@"
   (unless uid
     (set! uid (string->md5sum (date->string (current-date) "~Y-~m-~d ~H:~M:~S~N")))
     (print (string-append
-            "Set-Cookie:userid=" uid ";"
+            "Set-Cookie:iine-uid=" uid ";"
             "Max-Age=" (number->string (* 60 60 24)) ";"
             "Path=/;secure")))
- 
-  ;; cgi header ここまで
+  
   (let ((cgi-header (lambda ()
                       (print "Content-Type: text/html; charset=UTF-8")
                       (newline))))
     (cgi-header))
-
+  
   (cond
-   ;; ページ読み込み時の表示処理
+   ;; ページ読み込み時の処理
    ((and (equal? mode "get") pid) (display-count))
-   ;; いいネ！した時の処理
+   ;; いいネリクエスト時の処理
    ((and (equal? mode "put") pid uid)
-    ;;いいネ！の記録がなかたら
+    ;;いいネしてなかったら
     (if (= 0 (query fetch-value
-                    (sql db "SELECT COUNT(*) FROM iine_table WHERE entry_id = ? AND account_id = ?")
+                    (sql db "SELECT COUNT(*) FROM iine_table WHERE pid = ? AND uid = ?")
                     pid uid))
-        ;; いいネ！レコードを挿入
-        (exec (sql db "INSERT INTO iine_table (entry_id, account_id) VALUES (?, ?)")
+        ;; いいネする
+        (exec (sql db "INSERT INTO iine_table (pid, uid) VALUES (?, ?)")
               pid uid))
     (display-count))
    (else ""))
