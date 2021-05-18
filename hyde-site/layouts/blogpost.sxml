@@ -20,6 +20,12 @@
        (inject ,(toc contents)))
   )
 
+`(div (@ (class "vote") (id "vote"))
+      (p (@ (class "vote-lead")) "この記事が気に入ったら →")
+      (a (@ (href "#") (class "vote-button"))
+         (span (@ (class "icon")) (i (@ (class "fa fa-heart"))) "いいネ!")
+         (span (@ (class "number")))))
+
 ;comment system by intensedebate.com
 `(script
 "var idcomments_acct = 'xxxxxxxxxxxxxxx';"
