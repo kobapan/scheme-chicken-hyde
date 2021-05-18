@@ -24,18 +24,7 @@
                         (span ,(main-title))))))
          (div (@ (id "content"))
               (div (@ (class "column--l"))
-                   (inject ,contents)
-
-                   (script (@ (async) (src "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")))
-                   (ins (@ (class "adsbygoogle")
-                           (style "display:block; text-align:center;")
-                           (data-ad-layout "in-article")
-                           (data-ad-format "fluid")
-                           (data-ad-client "ca-pub-4058741246051503")
-                           (data-ad-slot "8302733527")))
-                   (script "(adsbygoogle = window.adsbygoogle || []).push({});")
-
-                   )
+                   (inject ,contents))
               (div (@ (class "column--r"))
                    (nav
                     (span (@ (id "search-box"))
