@@ -1,8 +1,38 @@
 ()
 
 `(inject ,contents)
+
+`(div (@ (class "article-meta-footer"))
+      ,(if ($ 'date)
+           `(span (@ (class "date"))
+                  ,($ 'date)" ")
+           "")
+      ,(fold (lambda (tag seed)
+               (append seed
+                       `(,(and (pair? seed) " ")
+                         (span (a (@ (href ,(base-uri)"/tags/#",tag)
+                                     (class "tag"))
+                                  "#",tag)))))
+             '()
+             (or ($ 'tags) '())))
+
+`(div (@ (class "fukidashi-box"))
+      (div (@ (class "iine") (id "iine"))
+           (p (@ (class "iine-lead")) "この記事が気に入ったら →")
+           (a (@ (href "#") (class "iine-button"))
+              (span (@ (class "icon")) (i (@ (class "fa fa-heart"))) "いいネ!")
+              (span (@ (class "number"))))
+      )
+      (p (@ (class "fukidashi")) "SNSアカウント不要で、いいネ!できます。足跡も残りません。")
+      )
+
 (if ($ 'tags)
-    `(div
-      (h2 "「",(car ($ 'tags))"」related posts")
-      ,(tag-posts-links (car ($ 'tags)) 10))
+    (let ((tag (car ($ 'tags))))
+      `((p)
+        (div
+         (h2 (a (@ (href "/tags/#",tag )) "#",tag) " 最新記事")
+         ,(posts-with-tag-links tag 10)
+         
+         (p (@ (class "read-more")) (a (@ (href "/tags/#",tag )) "... もっと読む"))
+         )))
     "")
