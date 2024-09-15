@@ -8,6 +8,7 @@
 
 (define (base-uri) "http://localhost:8080")
 (define (main-title) "My site")
+(define max-articles 20)
 
 ;; ---
 ;; fundamental
@@ -35,19 +36,33 @@
                ("OTHERS"
                 ("Links" . "links"))
                )))
-  `(ul (@ (class "gmenu"))
-        ,(map (lambda (nav)
-               (if (list? nav)
-                   `(li (a (@ (class "dropdown-toggle")) ,(car nav))
-                       (ul ,(map (lambda (sub-nav)
-                                   `(li (a (@ (href ,(base-uri)"/",(r/ (cdr sub-nav)))
-                                              (id ,(cdr sub-nav)))
-                                           ,(car sub-nav))))
-                                 (cdr nav))))
-                    `(li (a (@ (href ,(base-uri)"/",(r/ (cdr nav)))
-                               (id ,(cdr nav)))
-                            ,(car nav)))))
-              navs))))
+    (define pair->a-link
+      (lambda (src)
+        (cond
+         ((pair? src)
+          `(a (@ (href ,(conc (base-uri) "/" (r/ (cdr src))))
+                 (id ,(cdr src)))
+              ,(car src)))
+         (else src))))
+`(div
+    (ul (@ (class "gmenu"))
+         ,(map (lambda (nav)
+                 (if (list? nav)
+                     `(li ,(pair->a-link (car nav))
+                          (ul ,(map (lambda (sub-nav)
+                                      `(li ,(pair->a-link sub-nav)))
+                                    (cdr nav))))
+                     `(li ,(pair->a-link nav))))
+               navs))
+
+    (div (@ (id "tagcloud"))
+          ,(map (lambda (t)
+                  `((a (@ (href ,(base-uri)"/tags/#",(car t))
+                          (class ,(tag-class t)" onetag"))
+                       "#",(car t))))
+                (tag-groups (all-posts))))
+    
+    )))
 
 ;; ---
 ;; listing pages
@@ -66,8 +81,26 @@
                                     (if tag (member tag (or ($ 'tags (cdr p)) '())) #t)))
                    ((environment-ref (page-eval-env) 'pages)))))
 
-(define (all-posts #!optional (tag #f))
-  (sort-by (pages-matching "blog/.+\\.md$" tag) page-date->second))
+;; (all-posts)
+;; (all-posts 'ペチカ)
+;; (all-posts 'ペチカ 10)
+;; (all-posts #f 10)
+(define (all-posts #!optional (tag #f) (num 0))
+  (let ((posts (sort-by (pages-matching "blog/.+\\.md$" tag) page-date->second)))
+    (cond ((= num 0) posts)
+          ((< (length posts) num) posts)
+          (else (take posts num)))))
+
+;; (list-posts '火)
+;; (list-posts '火 10)
+(define (list-posts tag #!optional (num 0))
+  (let ((posts (all-posts tag num)))
+    `(ul ,(map (lambda (post)
+                 `((li (a (@ (href ,(base-uri),(page-path post))) ,($ 'title post))
+                       " "
+                       (span (@ (class "date")) ,($ 'date post))
+                       )))
+               posts))))
 
 (define (all-pages-and-posts)
   (let ((p '("profile"
@@ -83,10 +116,11 @@
 ;; tags
 ;; ---
 
-;; posts link filtered by tag
+;; post-links filtered by tag
 ;; exclude current post
-;; @num show num posts
-(define (tag-posts-links tag #!optional num)
+;; @tag string: tag name
+;; @num int: show num posts
+(define (posts-with-tag-links tag #!optional num)
   (let* ((tag-posts-all (all-posts tag)))
     `(dl ,(let loop ((tag-posts-all tag-posts-all) (num num) (res '()))
             (if (or (= 0 num) (null? tag-posts-all))
@@ -102,7 +136,18 @@
                        (- num 1)
                        (cons res `((dt (a (@ (href ,(base-uri),(page-path p))) ,($ 'title p))
                                        " "
-                                       (span (@ (class "date")) ,($ 'date p)))))))))))))
+                                       (span (@ (class "date")) ,($ 'date p)
+                     
+                                             ,(fold (lambda (tag seed)
+                                                      (append seed
+                                                              `(" "(span (a (@ (href ,(base-uri)"/tags/#",tag)
+                                                                               (class "tag"))
+                                                                            "#",tag)))))
+                                                    '()
+                                                    (or ($ 'tags p) '()))
+                     
+                                             ))))))))))))
+
 ;; list of all posts grouped by tag
 (define (tag-groups posts)
   (let ((tags '()))
@@ -165,7 +210,7 @@
                             "<li><a href=\"#toc-" (number->string num) "\">"
                             text "</a></li> ")))
                         (loop
-                         num prev (string-append html line) toc))))))))))
+                         num prev (string-append html line "\n") toc))))))))))
 
 ;; ---
 ;; page vars
@@ -212,4 +257,3 @@
     (lambda ()
       (read)
       (read-string))))
-
